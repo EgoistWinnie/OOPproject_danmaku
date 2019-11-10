@@ -10,17 +10,19 @@ public class CPEdanmaku extends BasicGame {
 	public static final String GAME_IDENTIFIER = "com.mystudio.thcped";
 
   private Texture texture;
-  
+  private int screenWidth, screenHeight;
   Player player;
+  KeyInput keyinput;
 	
 	@Override
     public void initialise() {
-    	texture = new Texture("mini2Dx.png");
+      texture = new Texture("mini2Dx.png");
+      player = new Player(40,40,2);
     }
     
     @Override
     public void update(float delta) {
-    
+      
     }
     
     @Override
@@ -30,6 +32,7 @@ public class CPEdanmaku extends BasicGame {
     
     @Override
     public void render(Graphics g) {
-		g.drawTexture(texture, 0f, 0f);
+    g.drawTexture(texture, 0f, 0f);
+    player.render(g);
     }
 }
