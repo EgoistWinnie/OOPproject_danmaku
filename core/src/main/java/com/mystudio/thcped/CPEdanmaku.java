@@ -11,28 +11,34 @@ public class CPEdanmaku extends BasicGame {
 
   private Texture texture;
   private int screenWidth, screenHeight;
-  Player player;
-  KeyInput keyinput;
+  private Player player;
+  private Boss boss;
+  private KeyInput keyInput;
 	
 	@Override
     public void initialise() {
       texture = new Texture("mini2Dx.png");
-      player = new Player(40,40,2);
+      this.player = new Player(40,300,2);
+      this.boss = new Boss(40, 40, 5);
+      this.keyInput = new KeyInput(this.player);
+
     }
     
     @Override
     public void update(float delta) {
-      
+      Gdx.input.setInputProcessor(this.keyInput);
+      player.update(delta);
     }
     
     @Override
     public void interpolate(float alpha) {
-    
+    player.interpolate(alpha);
     }
     
     @Override
     public void render(Graphics g) {
     g.drawTexture(texture, 0f, 0f);
     player.render(g);
+    boss.render(g);
     }
 }

@@ -18,13 +18,12 @@ public class Entity{
         this.y = y;
         this.hp = hp;
         this.isDead = false;
-        
     }
 
     public double getX() {return this.x;}
     public double getY() {return this.y;}
 
-    public void moveUp()
+    /*public void moveUp()
     {
         this.y += 2;
     }
@@ -42,6 +41,6 @@ public class Entity{
     public void moveRight()
     {
         this.x += 2;
-    }
+    }*/
 
 }

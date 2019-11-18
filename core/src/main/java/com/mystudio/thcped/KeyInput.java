@@ -3,9 +3,25 @@ package com.mystudio.thcped;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
 
+import com.mystudio.thcped.Player;
+
 public class KeyInput implements InputProcessor{
 
     public boolean keyDown = false;
+
+    private Player player;
+    public boolean isMove;
+
+    public KeyInput(Player player)
+    {
+      this.player = player;
+    }
+
+    /* no need to use this function anymore
+    public void playerAction(boolean isMove,char whatKey)
+    {
+      this.player.playerAction(isMove,whatKey);
+    }*/
 
     @Override
       public boolean keyDown (int keycode){
@@ -13,18 +29,21 @@ public class KeyInput implements InputProcessor{
             this.keyDown = true;
             switch(keycode){
                   case Keys.UP :
-                        
+                        this.player.playerMove().set(this.keyDown,'u');
+                        //playerAction(this.keyDown,'u');
                         break;
                   case Keys.DOWN :
-                        
+                        this.player.playerMove().set(this.keyDown,'d');  
                         break;
                   case Keys.LEFT :
-                        
+                        this.player.playerMove().set(this.keyDown,'l');      
                         break;
                   case Keys.RIGHT :
-                        
+                        this.player.playerMove().set(this.keyDown,'r');      
                         break;
                   case Keys.Z :
+                        this.player.playerMove().set(this.keyDown,'z');
+                        break;
 
             }
             return false;
@@ -35,16 +54,20 @@ public class KeyInput implements InputProcessor{
             this.keyDown = false;
             switch(keycode){
                   case Keys.UP :
-                        
+                        this.player.playerMove().set(this.keyDown,'u');
+                        //playerAction(this.keyDown,'u');
                         break;
                   case Keys.DOWN :
-                        
+                        this.player.playerMove().set(this.keyDown,'d');  
                         break;
                   case Keys.LEFT :
-                        
+                        this.player.playerMove().set(this.keyDown,'l');      
                         break;
                   case Keys.RIGHT :
-                        
+                        this.player.playerMove().set(this.keyDown,'r');      
+                        break;
+                  case Keys.Z :
+                        this.player.playerMove().set(this.keyDown,'z');
                         break;
             }
             return false;

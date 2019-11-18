@@ -2,32 +2,64 @@ package com.mystudio.thcped;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+//import org.mini2Dx.core.engine.geom.CollisionBox;
 import org.mini2Dx.core.engine.geom.CollisionCircle;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.graphics.Sprite;
 
-public class Player extends Entity {
+//public class Player extends Entity {
+public class Player{
 
-    public CollisionCircle playeCollisionCircle;
+    public CollisionCircle playerCC;
     public Sprite playerSprite;
+    public PlayerMove playerMove;
+    private int hp;
+    private boolean isDead;
 
-    public Player(double x,double y,int hp)
+    public Player(float x,float y,int hp)
     {
-        super(x,y,hp);   
+        //super(x,y,hp);   
         setSprite();
-    }
+        this.playerCC = new CollisionCircle(x, y, 50);
+        
+        this.playerMove = new PlayerMove(playerCC, 3f);
 
+        //might get these out later
+        this.hp = hp;
+        this.isDead = false;
+    }
 
     public void setSprite()
     {
         this.playerSprite = new Sprite(new Texture(Gdx.files.internal("testplayer_red2.png")));
     }
 
-    public void render(Graphics g) {
-    g.drawSprite(playerSprite);
-    }
-    
-    
 
+    public void update(float delta){
+        playerCC.preUpdate();
+        this.playerMove.update(delta);
+
+    }
+
+    public void interpolate(float alpha){
+        this.playerCC.interpolate(null, alpha);
+  }
+
+    public void render(Graphics g) {
+    g.drawSprite(this.playerSprite, this.playerCC.getRenderX(), this.playerCC.getRenderY());
+    }
+
+    public float getX(){
+        return this.playerCC.getRenderX();
+    }
+
+    public float getY(){
+        return this.playerCC.getRenderY();
+    }
+
+    public PlayerMove playerMove()
+    {
+        return this.playerMove;
+    }
 
 }
