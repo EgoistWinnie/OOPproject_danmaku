@@ -9,7 +9,7 @@ import org.mini2Dx.core.graphics.Graphics;
 public class CPEdanmaku extends BasicGame {
 	public static final String GAME_IDENTIFIER = "com.mystudio.thcped";
 
-  private Texture texture;
+  private Texture gamebg;
   private int screenWidth, screenHeight;
   private Player player;
   private Boss boss;
@@ -17,7 +17,7 @@ public class CPEdanmaku extends BasicGame {
 	
 	@Override
     public void initialise() {
-      texture = new Texture("mini2Dx.png");
+      gamebg = new Texture("roombg2.png");
       this.player = new Player(40,300,2);
       this.boss = new Boss(40, 40, 5);
       this.keyInput = new KeyInput(this.player);
@@ -37,7 +37,7 @@ public class CPEdanmaku extends BasicGame {
     
     @Override
     public void render(Graphics g) {
-    g.drawTexture(texture, 0f, 0f);
+    g.drawTexture(gamebg, 0f, 0f);
     player.render(g);
     boss.render(g);
     }

@@ -44,6 +44,6 @@ import org.mini2Dx.core.graphics.Graphics;
     g.drawSprite(this.BossSprite, this.BossCC.getRenderX(), this.BossCC.getRenderY());
     }
 
-
+    
 
 }

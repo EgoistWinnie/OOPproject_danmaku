@@ -12,7 +12,7 @@ public class Entity{
     public int hp;
     public boolean isDead;
 
-    public Entity(double x,double y,int hp)
+    public Entity(double x,double y,int hp,boolean isDead)
     {
         this.x = x;
         this.y = y;

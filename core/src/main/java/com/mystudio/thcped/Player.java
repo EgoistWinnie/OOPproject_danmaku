@@ -12,7 +12,7 @@ public class Player{
 
     public CollisionCircle playerCC;
     public Sprite playerSprite;
-    public PlayerMove playerMove;
+    private PlayerMove playerMove;
     private int hp;
     private boolean isDead;
 
@@ -46,7 +46,7 @@ public class Player{
   }
 
     public void render(Graphics g) {
-    g.drawSprite(this.playerSprite, this.playerCC.getRenderX(), this.playerCC.getRenderY());
+    g.drawSprite(this.getSprite(), this.playerCC.getRenderX(), this.playerCC.getRenderY());
     }
 
     public float getX(){
@@ -55,6 +55,10 @@ public class Player{
 
     public float getY(){
         return this.playerCC.getRenderY();
+    }
+
+    public Sprite getSprite(){
+        return this.playerSprite;
     }
 
     public PlayerMove playerMove()

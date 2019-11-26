@@ -5,6 +5,7 @@ import org.mini2Dx.core.engine.geom.CollisionCircle;
 public class PlayerMove{
     public CollisionCircle playerCC;
     public float playerSpeed;
+    
     private boolean up, down, left, right, shoot;
 
     public PlayerMove(CollisionCircle playerCC,float playerSpeed)
@@ -27,6 +28,10 @@ public class PlayerMove{
                     break;
               case 'r' :
                     this.right = moving;
+                    break;
+              case 'z' :
+                    this.shoot = moving;
+                    break;    
         }
   }
 
@@ -42,6 +47,9 @@ public class PlayerMove{
         }
         if(right){
               this.moveRight(delta);
+        }
+        if(shoot){
+              this.playerShoot(delta);
         }
   }
 
@@ -59,6 +67,9 @@ public class PlayerMove{
 
   public void moveDown(float delta){
         this.playerCC.set(this.playerCC.getX(), this.playerCC.getY() + (this.playerSpeed * delta * 100));
+  }
+  public void playerShoot(float delta){
+      
   }
 
 }
