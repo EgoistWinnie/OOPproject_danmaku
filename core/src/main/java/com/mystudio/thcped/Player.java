@@ -1,5 +1,7 @@
 package com.mystudio.thcped;
 
+import java.util.*;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 //import org.mini2Dx.core.engine.geom.CollisionBox;
@@ -13,6 +15,7 @@ public class Player{
     public CollisionCircle playerCC;
     public Sprite playerSprite;
     private PlayerMove playerMove;
+    private PlayerBullet playerBullet;
     private int hp;
     private boolean isDead;
 
@@ -21,8 +24,11 @@ public class Player{
         //super(x,y,hp);   
         setSprite();
         this.playerCC = new CollisionCircle(x, y, 50);
-        
-        this.playerMove = new PlayerMove(playerCC, 3f);
+        this.playerMove = new PlayerMove(playerCC, 3f,playerBullet);
+        /**
+         * moving to a subclass
+         * this.playerBullet = new Bullet(x, y, 5f);
+         */
 
         //might get these out later
         this.hp = hp;
@@ -33,7 +39,6 @@ public class Player{
     {
         this.playerSprite = new Sprite(new Texture(Gdx.files.internal("testplayer_red2.png")));
     }
-
 
     public void update(float delta){
         playerCC.preUpdate();
@@ -65,5 +70,6 @@ public class Player{
     {
         return this.playerMove;
     }
+
 
 }
