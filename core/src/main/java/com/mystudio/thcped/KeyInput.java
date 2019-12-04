@@ -55,7 +55,6 @@ public class KeyInput implements InputProcessor{
             switch(keycode){
                   case Keys.UP :
                         this.player.playerMove().set(this.keyDown,'u');
-                        //playerAction(this.keyDown,'u');
                         break;
                   case Keys.DOWN :
                         this.player.playerMove().set(this.keyDown,'d');  

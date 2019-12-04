@@ -15,43 +15,71 @@ public class Player{
     public CollisionCircle playerCC;
     public Sprite playerSprite;
     private PlayerMove playerMove;
-    private PlayerBullet playerBullet;
     private int hp;
     private boolean isDead;
+    private CollisionHandler collisionHandler;
+
+    //public Set<Bullet> pBullet = new HashSet<>();
+    //public Iterator<Bullet> itb = pBullet.iterator();
+    
+
+    public Set<Bullet> pBullet;
 
     public Player(float x,float y,int hp)
     {
+
+        
         //super(x,y,hp);   
         setSprite();
         this.playerCC = new CollisionCircle(x, y, 50);
-        this.playerMove = new PlayerMove(playerCC, 3f,playerBullet);
-        /**
-         * moving to a subclass
-         * this.playerBullet = new Bullet(x, y, 5f);
-         */
+        this.playerMove = new PlayerMove(this, 4f);
+        pBullet = new HashSet<>();
 
-        //might get these out later
         this.hp = hp;
         this.isDead = false;
+        
     }
 
     public void setSprite()
     {
-        this.playerSprite = new Sprite(new Texture(Gdx.files.internal("testplayer_red2.png")));
+        this.playerSprite = new Sprite(new Texture(Gdx.files.internal("player1.png")));
+    }
+    
+    public void createBullet(float x,float y)
+    {
+        pBullet.add(new PlayerBullet(x, y, 2f));
     }
 
     public void update(float delta){
         playerCC.preUpdate();
         this.playerMove.update(delta);
+        Iterator<Bullet> itb = pBullet.iterator();
+        while(itb.hasNext()){
+            Bullet nb = itb.next();
+            nb.bulletCB.preUpdate();
+            nb.bulletCB.set(nb.bulletCB.getX(), nb.bulletCB.getY() - (nb.getSpeed() * delta * 100));
 
+            /**If the bullet hit the boss, decrease its hps */
+            CPEdanmaku.ch.BulletHitBoss(nb.bulletCB);
+        }
     }
 
     public void interpolate(float alpha){
         this.playerCC.interpolate(null, alpha);
-  }
+        Iterator<Bullet> itb = pBullet.iterator();
+        while(itb.hasNext()){
+            itb.next().bulletCB.interpolate(null,alpha);
+        }
+    }
 
     public void render(Graphics g) {
-    g.drawSprite(this.getSprite(), this.playerCC.getRenderX(), this.playerCC.getRenderY());
+        g.drawSprite(this.getSprite(), this.playerCC.getRenderX(), this.playerCC.getRenderY());
+        Iterator<Bullet> itb = pBullet.iterator();
+        while(itb.hasNext()){
+            //itb.next().bulletCB.render(g);
+            Bullet nb = itb.next();
+            g.drawSprite(nb.getSprite(), nb.bulletCB.getRenderX(), nb.bulletCB.getRenderY());
+        }
     }
 
     public float getX(){
@@ -70,6 +98,9 @@ public class Player{
     {
         return this.playerMove;
     }
+
+    public int getHP(){return this.hp;}
+    public void setHP(int hp){this.hp = hp;}
 
 
 }

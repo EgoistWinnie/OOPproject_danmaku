@@ -9,30 +9,40 @@ import org.mini2Dx.core.graphics.Sprite;
 import com.badlogic.gdx.graphics.Texture;
 
 
-public class PlayerBullet{
-
-    public Set<Bullet> pBullet = new HashSet<>();
+public class PlayerBullet extends Bullet{
     
+    Sprite z = new Sprite(new Texture(Gdx.files.internal("Shuriken2.png")));
+
     public PlayerBullet(float x,float y,float speed){
-        setPlayerbullet();
+        super(x,y,speed);
+        super.setBulletsprite(z);
     }
 
-    public void setPlayerbullet(){
-        super.setBulletsprite(new Sprite(new Texture(Gdx.files.internal("bullettest.png"))));
-    }
-
-    public void createBullet(float x , float y)
+    /*public void createBullet(float x , float y)
     {
-        //this.pBullet.add(new Bullet(this.playerCC.getRenderX(),this.playerCC.getRenderY(),5f));
-        this.pBullet.add(new PlayerBullet(x,y,5f));
-    }
+        Bullet newb = new Bullet(x,y,5f);
+        newb.setBulletsprite(new Sprite(new Texture(Gdx.files.internal("bullettest.png"))));
+        this.pBullet.add(newb);
+    }*/
 
     /*public void removeBullet(float x , float y)
     {
-        itb.next();
-        itb.remove();
+        
     }*/
     
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

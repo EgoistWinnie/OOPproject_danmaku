@@ -1,19 +1,19 @@
 package com.mystudio.thcped;
 
-import org.mini2Dx.core.engine.geom.CollisionCircle;
-
 public class PlayerMove{
-    public CollisionCircle playerCC;
-    public float playerSpeed;
-    public PlayerBullet pbullet;
+    private Player player;
+    private float playerSpeed;
+    //private PlayerBullet pBullet;
     
     private boolean up, down, left, right, shoot;
 
-    public PlayerMove(CollisionCircle playerCC,float playerSpeed,PlayerBullet bullet)
+      /**set how player moving with keys */
+
+    public PlayerMove(Player player,float playerSpeed)
     {
-        this.playerCC = playerCC;
+        this.player = player;
         this.playerSpeed = playerSpeed;
-        this.pbullet = bullet;
+        //this.pBullet = bullet;
     }
 
     public void set(boolean isMove,char whatKey){
@@ -51,30 +51,31 @@ public class PlayerMove{
               this.moveRight(delta);
         }
         if(shoot){
-              this.playerShoot(delta);
+            this.player.pBullet.add(new PlayerBullet(this.player.playerCC.getX(), this.player.playerCC.getY(), 7f));
+            
         }
   }
 
   public void moveLeft(float delta){
-        if(playerCC.getX() >= 0)
-        this.playerCC.set(this.playerCC.getX() - (this.playerSpeed * delta * 100), this.playerCC.getY());
+        if(player.playerCC.getX() >= 0)
+        this.player.playerCC.set(this.player.playerCC.getX() - (this.playerSpeed * delta * 100), this.player.playerCC.getY());
   }
 
   public void moveRight(float delta){
-        this.playerCC.set(this.playerCC.getX() + (this.playerSpeed * delta * 100), this.playerCC.getY());
+        this.player.playerCC.set(this.player.playerCC.getX() + (this.playerSpeed * delta * 100), this.player.playerCC.getY());
   }
 
   public void moveUp(float delta){
-      if(playerCC.getY() >= 0)
-        this.playerCC.set(this.playerCC.getX(), this.playerCC.getY() - (this.playerSpeed * delta * 100));
+      if(player.playerCC.getY() >= 0)
+        this.player.playerCC.set(this.player.playerCC.getX(), this.player.playerCC.getY() - (this.playerSpeed * delta * 100));
   }
 
   public void moveDown(float delta){
-        this.playerCC.set(this.playerCC.getX(), this.playerCC.getY() + (this.playerSpeed * delta * 100));
+        this.player.playerCC.set(this.player.playerCC.getX(), this.player.playerCC.getY() + (this.playerSpeed * delta * 100));
   }
 
-  public void playerShoot(float delta){
-        this.pbullet.createBullet(this.playerCC.getX(), this.playerCC.getY());
-  }
+  /*public void playerShoot(float delta){
+        player.createBullet(this.player.playerCC.getX(), this.player.playerCC.getY());
+  }*/
 
 }
